@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class InvaderScript : MonoBehaviour
 {
-    public static float speed = 2.0f;
+    public static float speed = 5.0f;
+
+    private GameManager gm;
     
    
 
     void Start()
 
     {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
 
@@ -37,8 +40,15 @@ public class InvaderScript : MonoBehaviour
             }
         }
 
-        
-       
+        //check to see if we collide with the Player
+        if (collision.gameObject.tag == "Player")
+        {
+            gm.killed();
+            Destroy(collision.gameObject); //destroy the ship
+
+        }
+
+            
 
 
     }
